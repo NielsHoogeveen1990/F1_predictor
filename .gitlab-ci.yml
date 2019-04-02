@@ -1,0 +1,9 @@
+image: python:3.6
+
+test:
+  script:
+    - pip install -r requirements.txt
+    - pip install -r dev-requirements.txt
+    - python setup.py develop
+    - pytest
+    - flake8
