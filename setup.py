@@ -5,7 +5,7 @@ setup(
     name='formula1',
     keywords='',
     version='0.1',
-    author='Niels Hoogeveen',
+    author='Niels Hoogeveen2',
     packages=find_packages(exclude=['data', 'notebooks']),
     entry_points={
         'console_scripts': [
