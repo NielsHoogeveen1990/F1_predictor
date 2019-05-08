@@ -5,13 +5,15 @@ setup(
     name='formula1',
     keywords='',
     version='0.1',
-    author='Pim Hoeven',
-    packages=find_packages(),
+    author='Niels Hoogeveen',
+    packages=find_packages(exclude=['data', 'notebooks']),
     entry_points={
         'console_scripts': [
-            # name you put in bash = function that you call
-            'formula1 = formula1.main:main'
+            'run-model=formula1.models.models_utils_GS:run',
+            'run-model-2=formula1.models.models_utils_GS_groupkfold:run',
+            'run-model-3=formula1.models.models_utils_randomsearch_groupkfold:run'
         ]
     }
 )
+
 

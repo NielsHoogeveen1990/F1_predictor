@@ -1,4 +1,7 @@
 pandas
 matplotlib
 numpy
-scikit-learn 
+scikit-learn
+seaborn
+xgboost
+flask
