@@ -4,7 +4,7 @@ from setuptools import setup, find_packages
 setup(
     name='formula1',
     keywords='',
-    version='0.1',
+    version='0.2',
     author='Niels Hoogeveen',
     packages=find_packages(exclude=['data', 'notebooks']),
     entry_points={
