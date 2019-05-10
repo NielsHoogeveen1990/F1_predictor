@@ -13,7 +13,7 @@ def pipeline():
     numerical_pipeline = make_pipeline(
         DTypeSelector('number'),
         CorrFilterHighTotalCorrelation(),
-        SimpleImputer(),
+        SimpleImputer(strategy='median'),
         StandardScaler()
     )
 

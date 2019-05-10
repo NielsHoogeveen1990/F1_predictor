@@ -2,7 +2,7 @@ from sklearn.model_selection import train_test_split
 from sklearn.model_selection import GridSearchCV
 from sklearn.metrics import accuracy_score, f1_score
 from formula1.preprocessing import get_clean_df
-from formula1.models import RF
+from formula1.models import XGBoost
 import pickle
 
 def split_data(df):
@@ -39,12 +39,12 @@ def run():
 
     X_train, X_test, y_train, y_test = split_data(df)
 
-    fitted_model = fit(RF, X_train, y_train)
+    fitted_model = fit(XGBoost, X_train, y_train)
 
     y_hat = fitted_model.predict(X_test)
 
     evaluate(y_hat, y_test)
 
-    with open('../formula1/model.pkl', 'wb') as file:
+    with open('../formula1/XGBoost_model.pkl', 'wb') as file:
         pickle.dump(fitted_model, file)
 

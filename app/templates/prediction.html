@@ -21,7 +21,7 @@ input[type=button], input[type=submit], input[type=reset] {
   min-height: 100%;
   padding: 15px;
   background: #009bff;
-  background: -webkit-linear-gradient(left, #0072ff, #00c6ff);
+  background: -webkit-linear-gradient(left, #ED213A, #93291E);
   background: -o-linear-gradient(left, #0072ff, #00c6ff);
   background: -moz-linear-gradient(left, #0072ff, #00c6ff);
   background: linear-gradient(left, #0072ff, #00c6ff);
@@ -33,7 +33,7 @@ font-family: "Raleway", sans-serif;
   line-height: 1.2;
   text-align: center;
   padding-bottom: 44px;
-  color: #0072ff;
+  color: #292929;
 }
 
 .contact3 {
@@ -188,7 +188,7 @@ iframe {
   padding: 15px;
 
   background: #009bff;
-  background: -webkit-linear-gradient(left, #0072ff, #00c6ff);
+  background: -webkit-linear-gradient(left, #ED213A, #93291E);
   background: -o-linear-gradient(left, #0072ff, #00c6ff);
   background: -moz-linear-gradient(left, #0072ff, #00c6ff);
   background: linear-gradient(left, #0072ff, #00c6ff);
@@ -496,17 +496,20 @@ font-family: "Raleway", sans-serif;
 
 
 </style>
-    <title>First app</title>
+    <title>Formula 1 predictor</title>
   </head>
   
   
   <body class="contact1">
   <div class="contact1">
 		<div class="container-contact1">
-  
-  <div class="contact2">YOUR ISSUE WILL BE SOLVED AT:</div>
 
-<div class="contact3">{{ result}}</div>
+  <div class="contact2">PREDICTED RACE RESULT:</div>
+
+
+            <div class="contact3">At the {{ year}} {{ circuit}} </div>
+            <div class="contact3">{{ result1}} will finish in front of </div>
+            <div class="contact3">{{ result2}}</div>
 
 	</div>
 	</div>
