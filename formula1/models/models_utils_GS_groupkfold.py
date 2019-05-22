@@ -3,10 +3,14 @@ import numpy as np
 from sklearn.model_selection import GridSearchCV
 from sklearn.metrics import accuracy_score, f1_score, roc_auc_score
 from sklearn.model_selection import cross_val_score
-from formula1.preprocessing import get_clean_df
+from formula1.preprocessing_newdata import get_clean_df
 from formula1.models import XGBoost
 from sklearn.model_selection import GroupKFold
 import pickle
+
+
+CURRENT_YEAR = 2019
+
 
 def group_split_data(df):
     X = df.drop(columns='leftwon')
@@ -31,6 +35,7 @@ def fit(model, X_train, y_train):
                               cv=GroupKFold(n_splits=5).split(X_train.drop(columns=['year_left']), y_train, X_train['year_left']),
                               verbose=1,
                               refit=True,
+                              n_jobs= -1,
                               scoring='accuracy')
 
     gridsearch.fit(X_train.drop(columns=['year_left']), y_train)
@@ -60,6 +65,10 @@ def evaluate_test(y_hat, y_true):
 def run():
     df = get_clean_df()
 
+    df = df[df['year_left'] != CURRENT_YEAR]
+
+    df.drop('year_left', axis=1, inplace=True)
+
     X_train, X_test, y_train, y_test = group_split_data(df)
 
     X_test = X_test.drop(columns=['year_left'])
@@ -72,6 +81,10 @@ def run():
 
     evaluate_test(y_hat, y_test)
 
-    with open('../formula1/model2.pkl', 'wb') as file:
+    with open('trained_models/model_groupkfold.pkl', 'wb') as file:
         pickle.dump(fitted_model, file)
+
+    print(fitted_model.get_params())
+
+
 

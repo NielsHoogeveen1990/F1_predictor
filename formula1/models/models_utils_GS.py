@@ -1,9 +1,11 @@
 from sklearn.model_selection import train_test_split
 from sklearn.model_selection import GridSearchCV
 from sklearn.metrics import accuracy_score, f1_score
-from formula1.preprocessing import get_clean_df
+from formula1.preprocessing_newdata import get_clean_df
 from formula1.models import XGBoost
 import pickle
+
+CURRENT_YEAR = 2019
 
 def split_data(df):
     X = df.drop(columns='leftwon')
@@ -21,6 +23,7 @@ def fit(model, X_train, y_train):
                               cv=5,
                               verbose=1,
                               refit=True,
+                              n_jobs= -1,
                               scoring='accuracy')
 
     gridsearch.fit(X_train, y_train)
@@ -37,6 +40,10 @@ def evaluate(y_hat, y_true):
 def run():
     df = get_clean_df()
 
+    df = df[df['year_left'] != CURRENT_YEAR]
+
+    df.drop('year_left', axis=1, inplace=True)
+
     X_train, X_test, y_train, y_test = split_data(df)
 
     fitted_model = fit(XGBoost, X_train, y_train)
@@ -45,6 +52,8 @@ def run():
 
     evaluate(y_hat, y_test)
 
-    with open('../formula1/XGBoost_model.pkl', 'wb') as file:
+    with open('trained_models/final_model.pkl', 'wb') as file:
         pickle.dump(fitted_model, file)
+
+    print(fitted_model.get_params())
 

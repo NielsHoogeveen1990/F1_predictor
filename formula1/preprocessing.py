@@ -246,17 +246,17 @@ def get_combinations(df):
 def filter_combinations(df):
     return df[(df['driverId_left'] != df['driverId_right'])]
 
-@log_step
-def new_race(df):
-    return df.assign(
-        new_race = lambda df: (df['raceId'] != df['raceId'].shift(1)).astype(int)
-    )
-
-@log_step
-def get_total_races(df):
-    return df.assign(
-        total_races = lambda df: df['new_race'].cumsum()
-    )
+# @log_step
+# def new_race(df):
+#     return df.assign(
+#         new_race = lambda df: (df['raceId'] != df['raceId'].shift(1)).astype(int)
+#     )
+#
+# @log_step
+# def get_total_races(df):
+#     return df.assign(
+#         total_races = lambda df: df['new_race'].cumsum()
+#     )
 
 @log_step
 def get_winning_driver(df):
@@ -278,7 +278,7 @@ def get_final_dataset(df):
         'position_left',
         'positionOrder_left',
         'driverRef_left',
-        #'year_left',
+        'year_left',
         'circuitId_left',
         'name_left',
         'date_left',
@@ -297,6 +297,41 @@ def get_final_dataset(df):
         'name_right',
         'date_right']
     return df.drop(labels=subset, axis=1)
+
+@log_step
+def get_final_dataset_retrain(df):
+    subset = [
+        'raceId',
+        'driverId_left',
+        'constructorId_left',
+        'grid_left',
+        'win_left',
+        'pole_left',
+        'podium_left',
+        'dnf_left',
+        'position_left',
+        'positionOrder_left',
+        'driverRef_left',
+        'year_left',
+        'circuitId_left',
+        'name_left',
+        'date_left',
+        'driverId_right',
+        'constructorId_right',
+        'grid_right',
+        'win_right',
+        'pole_right',
+        'podium_right',
+        'dnf_right',
+        'position_right',
+        'positionOrder_right',
+        'driverRef_right',
+        'year_right',
+        'circuitId_right',
+        'name_right',
+        'date_right']
+    return df.drop(labels=subset, axis=1)
+
 
 
 @log_step
@@ -374,47 +409,90 @@ def drop_na_rows(df):
 
 def get_clean_df():
     return (read_data()
-            .pipe(merge_constructors)
-            .pipe(merge_drivers)
-            .pipe(merge_races)
-            .pipe(merge_status)
-            .pipe(merge_driverstandings)
-            .pipe(remove_columns)
-            .pipe(rename_columns)
-            .pipe(sort_races)
-            .pipe(average_finishing)
-            .pipe(average_finishing_percircuit)
-            .pipe(result_previous_race)
-            .pipe(mean_last_5races)
-            .pipe(get_wins)
-            .pipe(get_wins_per_circuit)
-            .pipe(get_poles)
-            .pipe(get_poles_per_circuit)
-            .pipe(get_total_wins)
-            .pipe(current_wins_inyear)
-            .pipe(get_total_poles)
-            .pipe(get_podiums)
-            .pipe(get_total_podiums)
-            .pipe(get_podiums_per_circuit)
-            .pipe(change_datetime)
-            .pipe(get_driver_age)
-            .pipe(get_career_years)
-            .pipe(get_DNF)
-            .pipe(get_DNF_last5races)
-            .pipe(racecounter_per_driver)
-            .pipe(last_race)
-            .pipe(current_championshipstanding)
-            # .pipe(preprocessing.get_WC)
-            .pipe(remove_remaining_columns)
-            .pipe(get_combinations)
-            .pipe(filter_combinations)
-            .pipe(new_race)
-            .pipe(get_total_races)
-            .pipe(get_winning_driver)
-            .pipe(get_final_dataset)
-            .pipe(fill_na_rows)
-            .pipe(drop_na_rows)
+    .pipe(merge_constructors)
+    .pipe(merge_drivers)
+    .pipe(merge_races)
+    .pipe(merge_status)
+    .pipe(merge_driverstandings)
+    .pipe(remove_columns)
+    .pipe(rename_columns)
+    .pipe(sort_races)
+    .pipe(average_finishing)
+    .pipe(average_finishing_percircuit)
+    .pipe(result_previous_race)
+    .pipe(mean_last_5races)
+    .pipe(get_wins)
+    .pipe(get_wins_per_circuit)
+    .pipe(get_poles)
+    .pipe(get_poles_per_circuit)
+    .pipe(get_total_wins)
+    .pipe(current_wins_inyear)
+    .pipe(get_total_poles)
+    .pipe(get_podiums)
+    .pipe(get_total_podiums)
+    .pipe(get_podiums_per_circuit)
+    .pipe(change_datetime)
+    .pipe(get_driver_age)
+    .pipe(get_career_years)
+    .pipe(get_DNF)
+    .pipe(get_DNF_last5races)
+    .pipe(racecounter_per_driver)
+    .pipe(last_race)
+    .pipe(current_championshipstanding)
+    .pipe(remove_remaining_columns)
+    .pipe(get_combinations)
+    .pipe(filter_combinations)
+    #.pipe(new_race)
+    #.pipe(get_total_races)
+    .pipe(get_winning_driver)
+    .pipe(get_final_dataset)
+    .pipe(fill_na_rows)
+    .pipe(drop_na_rows)
     )
+
+def get_clean_df_retrain():
+    return (read_data()
+    .pipe(merge_constructors)
+    .pipe(merge_drivers)
+    .pipe(merge_races)
+    .pipe(merge_status)
+    .pipe(merge_driverstandings)
+    .pipe(remove_columns)
+    .pipe(rename_columns)
+    .pipe(sort_races)
+    .pipe(average_finishing)
+    .pipe(average_finishing_percircuit)
+    .pipe(result_previous_race)
+    .pipe(mean_last_5races)
+    .pipe(get_wins)
+    .pipe(get_wins_per_circuit)
+    .pipe(get_poles)
+    .pipe(get_poles_per_circuit)
+    .pipe(get_total_wins)
+    .pipe(current_wins_inyear)
+    .pipe(get_total_poles)
+    .pipe(get_podiums)
+    .pipe(get_total_podiums)
+    .pipe(get_podiums_per_circuit)
+    .pipe(change_datetime)
+    .pipe(get_driver_age)
+    .pipe(get_career_years)
+    .pipe(get_DNF)
+    .pipe(get_DNF_last5races)
+    .pipe(racecounter_per_driver)
+    .pipe(last_race)
+    .pipe(current_championshipstanding)
+    .pipe(remove_remaining_columns)
+    .pipe(get_combinations)
+    .pipe(filter_combinations)
+    #.pipe(new_race)
+    #.pipe(get_total_races)
+    .pipe(get_winning_driver)
+    .pipe(get_final_dataset_retrain)
+    .pipe(fill_na_rows)
+    .pipe(drop_na_rows)
+    )
+
 
 def get_clean_app_df():
     return (read_data()
@@ -452,8 +530,8 @@ def get_clean_app_df():
             .pipe(remove_remaining_columns)
             .pipe(get_combinations)
             .pipe(filter_combinations)
-            .pipe(new_race)
-            .pipe(get_total_races)
+            #.pipe(new_race)
+            #.pipe(get_total_races)
             .pipe(get_winning_driver)
             .pipe(get_final_dataset_app)
             .pipe(fill_na_rows)

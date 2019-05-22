@@ -72,6 +72,7 @@ class CorrelationFilter(TransformerMixin, BaseEstimator):
         return self
 
     def transform(self, X):
+        X = X.copy()
         return X.drop(columns=self.columns_to_drop_)
 
     @staticmethod
