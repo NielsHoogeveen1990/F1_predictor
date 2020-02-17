@@ -3,7 +3,7 @@ from contextlib import closing
 import os
 import pandas as pd
 
-from formula1.preprocessing_newdata import get_clean_app_df
+from formula1.preprocessing_newdata_newrace import get_clean_app_df
 
 
 # Create a database

@@ -46,6 +46,11 @@ def prediction():
         third = race_result['driverRef_left'][2]
         fourth = race_result['driverRef_left'][3]
         fifth = race_result['driverRef_left'][4]
+        sixth = race_result['driverRef_left'][5]
+        seventh = race_result['driverRef_left'][6]
+        eighth = race_result['driverRef_left'][7]
+        ninth = race_result['driverRef_left'][8]
+        tenth = race_result['driverRef_left'][9]
 
         return render_template('prediction_test2.html',
                                first= first.capitalize(),
@@ -53,6 +58,11 @@ def prediction():
                                third= third.capitalize(),
                                fourth= fourth.capitalize(),
                                fifth= fifth.capitalize(),
+                               sixth= sixth.capitalize(),
+                               seventh=seventh.capitalize(),
+                               eighth=eighth.capitalize(),
+                               ninth=ninth.capitalize(),
+                               tenth=tenth.capitalize(),
                                year= year,
                                circuit = circuit)
 

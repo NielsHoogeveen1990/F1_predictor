@@ -2,7 +2,7 @@ import pandas as pd
 import numpy as np
 from formula1.utils import log_step
 
-PATH = '../new_data'
+PATH = 'new_data'
 
 @log_step
 def read_data():

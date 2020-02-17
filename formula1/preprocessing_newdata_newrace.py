@@ -3,7 +3,7 @@ import numpy as np
 from formula1.utils import log_step
 from formula1.peprocessing_newrace import create_new_results, create_new_driverstandings
 
-PATH = '../new_data'
+PATH = 'new_data'
 
 @log_step
 def read_data():

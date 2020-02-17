@@ -1,8 +1,9 @@
 import pandas as pd
+
 from formula1.preprocessing_newdata import read_data
 
 
-PATH = '../new_data'
+PATH = 'new_data'
 DRIVER_AMOUNT = 20
 
 
