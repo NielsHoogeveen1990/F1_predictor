@@ -1,4 +1,4 @@
-Welcome to the F1 predictor!
+#Welcome to the F1 predictor!
 
 Updating process:
 1. Download new race data
